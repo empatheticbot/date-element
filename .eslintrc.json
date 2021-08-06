@@ -1,0 +1,8 @@
+{
+  "root": true,
+  "extends": [
+    "plugin:github/browser",
+    "plugin:github/recommended",
+    "plugin:github/typescript"
+  ]
+}
