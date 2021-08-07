@@ -5,7 +5,7 @@ export default [
     input: 'dist/index.js',
     output: {
       file: pkg['module'],
-      format: 'es',
-    },
-  },
+      format: 'es'
+    }
+  }
 ]

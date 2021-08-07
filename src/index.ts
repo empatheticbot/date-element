@@ -1,9 +1,7 @@
 class RelativeTimeElement extends HTMLElement {
   date?: Date
   static get observedAttributes(): string[] {
-    return [
-      'datetime',
-    ]
+    return ['datetime']
   }
 
   connectedCallback(): void {
@@ -18,7 +16,6 @@ class RelativeTimeElement extends HTMLElement {
   disconnectedCallback(): void {
     unregisterRelativeTimeElement(this)
   }
-
 
   attributeChangedCallback(attrName: string, oldValue: string, newValue: string): void {
     if (attrName === 'datetime') {
@@ -48,7 +45,7 @@ class RelativeTimeElement extends HTMLElement {
     if (!this.date) {
       return [0, TimeUnit.Day]
     }
-    
+
     const ms = Math.abs(this.date.getTime() - new Date().getTime())
     const sec = Math.round(ms / 1000)
     const min = Math.round(sec / 60)
@@ -63,7 +60,7 @@ class RelativeTimeElement extends HTMLElement {
       return [month, TimeUnit.Month]
     } else if (day > 1) {
       return [day, TimeUnit.Day]
-    } else if(hr > 1) {
+    } else if (hr > 1) {
       return [hr, TimeUnit.Hour]
     } else if (min > 1) {
       return [min, TimeUnit.Minute]
@@ -82,7 +79,15 @@ class RelativeTimeElement extends HTMLElement {
   }
 
   refreshDisplayTime(): void {
-    this.innerText = this.getFormattedDate()
+    this.textContent = this.getFormattedDate()
+
+    const title = this.date?.toLocaleString('en-US', {
+      dateStyle: 'full',
+      timeStyle: 'long'
+    })
+    if (title) {
+      this.title = title
+    }
   }
 }
 
@@ -90,9 +95,9 @@ let relativeElements: RelativeTimeElement[] = []
 let relativeTimeUpdateInterval: number | undefined
 
 function updateRelativeTimeElements() {
-  relativeElements.forEach((element) => {
+  for (const element of relativeElements) {
     element.refreshDisplayTime()
-  })
+  }
 }
 
 function registerRelativeTimeElement(el: RelativeTimeElement) {
@@ -119,7 +124,7 @@ enum TimeUnit {
   Day = 'day',
   Hour = 'hour',
   Minute = 'minute',
-  Second = 'second',
+  Second = 'second'
 }
 
 if (!customElements.get('relative-date')) {

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relative Date Examples</title>
+  <style>
+    relative-date {
+      display: block;
+      font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+  <relative-date id="before" datetime="08/06/2021">
+    08/06/2021
+  </relative-date>
+
+  <relative-date id="after" datetime="08/06/2021">
+    08/06/2021
+  </relative-date>
+
+  <relative-date datetime="2021-08-06T03:55:00Z">
+    Something else
+  </relative-date>
+  <script>
+    const before = document.querySelector('#before')
+    const beforeDate = new Date()
+    beforeDate.setMinutes(beforeDate.getMinutes() - 2)
+    before.setAttribute('datetime', beforeDate.toISOString())
+
+    const after = document.querySelector('#after')
+    const afterDate = new Date()
+    afterDate.setMinutes(afterDate.getMinutes() + 2)
+    after.setAttribute('datetime', afterDate.toISOString())
+  </script>
+  <script type="module" src="../dist/index.js"></script>
+</body>
+</html>
