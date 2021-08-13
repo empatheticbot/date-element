@@ -1,5 +1,5 @@
 {
-  "name": "date-element",
+  "name": "@empatheticbot/time-elements",
   "version": "1.0.0",
   "description": "Date custom element that allows dynamic updates and relative dates. ",
   "module": "dist/index.js",
