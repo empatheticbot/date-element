@@ -1,1 +1,2 @@
 import './RelativeTimeElement'
+import './AwesomeTimeElement'

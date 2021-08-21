@@ -62,12 +62,12 @@ export class AwesomeTimeElement extends HTMLElement {
     }
 
     const ms = Math.abs(this.date.getTime() - new Date().getTime())
-    const sec = Math.floor(ms / 1000)
-    const min = Math.floor(sec / 60)
-    const hr = Math.floor(min / 60)
-    const day = Math.floor(hr / 24)
-    const month = Math.floor(day / 30)
-    const year = Math.floor(month / 12)
+    const sec = Math.ceil(ms / 1000)
+    const min = Math.ceil(sec / 60)
+    const hr = Math.ceil(min / 60)
+    const day = Math.ceil(hr / 24)
+    const month = Math.ceil(day / 30)
+    const year = Math.ceil(month / 12)
 
     if (year > 1) {
       return [year, TimeUnit.Year]
@@ -93,9 +93,10 @@ export class AwesomeTimeElement extends HTMLElement {
       }
       const formatter = Intl.DateTimeFormat('en-US', {
         year: 'numeric',
-        month: 'short'
+        month: 'short',
+        day: 'numeric'
       })
-      formatter.format(this.date)
+      return formatter.format(this.date)
     }
     return ''
   }
