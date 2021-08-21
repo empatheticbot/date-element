@@ -3,7 +3,7 @@ import {TimeUnit} from './utils'
 
 export class AwesomeTimeElement extends HTMLElement {
   date?: Date
-  relativeUntilDistanceDays = 3
+  relativeUntilDistanceDays = 4
 
   static get observedAttributes(): string[] {
     return ['datetime']
@@ -84,11 +84,8 @@ export class AwesomeTimeElement extends HTMLElement {
   }
 
   getFormattedDate(): string {
-    if (!this.date) {
-      return ''
-    }
-    if ('Intl' in window && this.date) {
-      if (this.isRelativeTime) {
+    if ('Intl' in window && this.date !== undefined) {
+      if (this.isRelativeTime()) {
         const formatter = new Intl.RelativeTimeFormat()
         const [length, unit] = this.getUnitOfMeasurement()
         const time = (this.isInFuture() ? 1 : -1) * length
