@@ -60,14 +60,16 @@ export class AwesomeTimeElement extends HTMLElement {
     if (!this.date) {
       return [0, TimeUnit.Day]
     }
+    const signedMilli = this.date.getTime() - new Date().getTime()
+    const roundingFunc = signedMilli < 0 ? Math.floor : Math.ceil
 
-    const ms = Math.abs(this.date.getTime() - new Date().getTime())
-    const sec = Math.ceil(ms / 1000)
-    const min = Math.ceil(sec / 60)
-    const hr = Math.ceil(min / 60)
-    const day = Math.ceil(hr / 24)
-    const month = Math.ceil(day / 30)
-    const year = Math.ceil(month / 12)
+    const ms = Math.abs(signedMilli)
+    const sec = roundingFunc(ms / 1000)
+    const min = roundingFunc(sec / 60)
+    const hr = roundingFunc(min / 60)
+    const day = roundingFunc(hr / 24)
+    const month = roundingFunc(day / 30)
+    const year = roundingFunc(month / 12)
 
     if (year > 1) {
       return [year, TimeUnit.Year]
