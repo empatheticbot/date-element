@@ -1,8 +1,9 @@
 import {registerRelativeTimeElement, unregisterRelativeTimeElement} from './TimeUpdateManager'
 import {TimeUnit} from './utils'
 
-export class RelativeTimeElement extends HTMLElement {
+export class AwesomeTimeElement extends HTMLElement {
   date?: Date
+  relativeUntilDistanceDays = 3
 
   static get observedAttributes(): string[] {
     return ['datetime']
@@ -37,6 +38,16 @@ export class RelativeTimeElement extends HTMLElement {
     }
   }
 
+  isRelativeTime(): boolean {
+    if (!this.date) {
+      return false
+    }
+    const today = new Date()
+    const differenceInMilli = this.date.valueOf() - today.valueOf()
+    const daysInMilli = this.relativeUntilDistanceDays * 1000 * 60 * 60 * 24
+    return Math.abs(differenceInMilli) < daysInMilli
+  }
+
   isInFuture(): boolean {
     if (!this.date) {
       return false
@@ -51,12 +62,12 @@ export class RelativeTimeElement extends HTMLElement {
     }
 
     const ms = Math.abs(this.date.getTime() - new Date().getTime())
-    const sec = Math.round(ms / 1000)
-    const min = Math.round(sec / 60)
-    const hr = Math.round(min / 60)
-    const day = Math.round(hr / 24)
-    const month = Math.round(day / 30)
-    const year = Math.round(month / 12)
+    const sec = Math.floor(ms / 1000)
+    const min = Math.floor(sec / 60)
+    const hr = Math.floor(min / 60)
+    const day = Math.floor(hr / 24)
+    const month = Math.floor(day / 30)
+    const year = Math.floor(month / 12)
 
     if (year > 1) {
       return [year, TimeUnit.Year]
@@ -73,11 +84,21 @@ export class RelativeTimeElement extends HTMLElement {
   }
 
   getFormattedDate(): string {
-    if ('Intl' in window) {
-      const formatter = new Intl.RelativeTimeFormat()
-      const [length, unit] = this.getUnitOfMeasurement()
-      const time = (this.isInFuture() ? 1 : -1) * length
-      return formatter.format(time, unit)
+    if (!this.date) {
+      return ''
+    }
+    if ('Intl' in window && this.date) {
+      if (this.isRelativeTime) {
+        const formatter = new Intl.RelativeTimeFormat()
+        const [length, unit] = this.getUnitOfMeasurement()
+        const time = (this.isInFuture() ? 1 : -1) * length
+        return formatter.format(time, unit)
+      }
+      const formatter = Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'short'
+      })
+      formatter.format(this.date)
     }
     return ''
   }
@@ -95,6 +116,6 @@ export class RelativeTimeElement extends HTMLElement {
   }
 }
 
-if (!customElements.get('relative-time')) {
-  customElements.define('relative-time', RelativeTimeElement)
+if (!customElements.get('awesome-time')) {
+  customElements.define('awesome-time', AwesomeTimeElement)
 }
