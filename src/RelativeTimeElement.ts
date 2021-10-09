@@ -1,5 +1,5 @@
-import {registerRelativeTimeElement, unregisterRelativeTimeElement} from './TimeUpdateManager'
-import {TimeUnit} from './utils'
+import { registerRelativeTimeElement, unregisterRelativeTimeElement } from './TimeUpdateManager'
+import { TimeUnit } from './utils'
 
 export class RelativeTimeElement extends HTMLElement {
   date?: Date
@@ -87,7 +87,7 @@ export class RelativeTimeElement extends HTMLElement {
 
     const title = this.date?.toLocaleString('en-US', {
       dateStyle: 'full',
-      timeStyle: 'long'
+      timeStyle: 'long',
     })
     if (title) {
       this.title = title
@@ -96,5 +96,15 @@ export class RelativeTimeElement extends HTMLElement {
 }
 
 if (!customElements.get('relative-time')) {
+  window.RelativeTimeElement = RelativeTimeElement
   customElements.define('relative-time', RelativeTimeElement)
+}
+
+declare global {
+  interface Window {
+    RelativeTimeElement: typeof RelativeTimeElement
+  }
+  interface HTMLElementTagNameMap {
+    'relative-time': RelativeTimeElement
+  }
 }

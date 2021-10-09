@@ -1,5 +1,5 @@
-import {registerRelativeTimeElement, unregisterRelativeTimeElement} from './TimeUpdateManager'
-import {TimeUnit} from './utils'
+import { registerRelativeTimeElement, unregisterRelativeTimeElement } from './TimeUpdateManager'
+import { TimeUnit } from './utils'
 
 export class AwesomeTimeElement extends HTMLElement {
   date?: Date
@@ -96,7 +96,7 @@ export class AwesomeTimeElement extends HTMLElement {
       const formatter = Intl.DateTimeFormat('en-US', {
         year: 'numeric',
         month: 'short',
-        day: 'numeric'
+        day: 'numeric',
       })
       return formatter.format(this.date)
     }
@@ -108,7 +108,7 @@ export class AwesomeTimeElement extends HTMLElement {
 
     const title = this.date?.toLocaleString('en-US', {
       dateStyle: 'full',
-      timeStyle: 'long'
+      timeStyle: 'long',
     })
     if (title) {
       this.title = title
@@ -117,5 +117,15 @@ export class AwesomeTimeElement extends HTMLElement {
 }
 
 if (!customElements.get('awesome-time')) {
+  window.AwesomeTimeElement = AwesomeTimeElement
   customElements.define('awesome-time', AwesomeTimeElement)
+}
+
+declare global {
+  interface Window {
+    AwesomeTimeElement: typeof AwesomeTimeElement
+  }
+  interface HTMLElementTagNameMap {
+    'awesome-time': AwesomeTimeElement
+  }
 }

@@ -13,7 +13,8 @@
     "prebuild": "npm run clean && npm run lint && mkdir dist",
     "build": "tsc && rollup -c",
     "prepublishOnly": "npm run build",
-    "start": "serve ."
+    "start": "serve .",
+    "update": "npm-check -u"
   },
   "repository": {
     "type": "git",
@@ -28,7 +29,6 @@
     "html",
     "javascript"
   ],
-  "prettier": "@github/prettier-config",
   "author": "Steve Ledsworth",
   "license": "MIT",
   "bugs": {
@@ -36,12 +36,15 @@
   },
   "homepage": "https://github.com/empatheticbot/date-element#readme",
   "devDependencies": {
-    "@github/prettier-config": "0.0.4",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-custom-elements": "^0.0.2",
     "eslint-plugin-github": "4.1.5",
+    "npm-check": "5.9.2",
+    "prettier": "^2.4.1",
     "rollup": "^2.56.0",
-    "typescript": "4.3.5",
-    "serve": "12.0.0"
+    "serve": "12.0.0",
+    "typescript": "4.3.5"
   },
   "eslintIgnore": [
     "dist/"

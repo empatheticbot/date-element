@@ -1,11 +1,11 @@
-import pkg from './package.json'
+import { module } from './package.json'
 
 export default [
   {
     input: 'dist/index.js',
     output: {
-      file: pkg['module'],
-      format: 'es'
-    }
-  }
+      file: module,
+      format: 'es',
+    },
+  },
 ]

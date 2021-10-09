@@ -1,2 +1,2 @@
-import './RelativeTimeElement'
-import './AwesomeTimeElement'
+import './relativeTimeElement'
+import './awesomeTimeElement'

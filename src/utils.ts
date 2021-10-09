@@ -4,5 +4,5 @@ export enum TimeUnit {
   Day = 'day',
   Hour = 'hour',
   Minute = 'minute',
-  Second = 'second'
+  Second = 'second',
 }

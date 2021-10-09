@@ -8,7 +8,5 @@
     "lib": ["dom", "dom.iterable", "es2020"],
     "removeComments": true
   },
-  "files": [
-    "src/index.ts"
-  ]
+  "files": ["src/index.ts"]
 }

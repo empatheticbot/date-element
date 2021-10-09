@@ -1,4 +1,4 @@
-import {RelativeTimeElement} from './RelativeTimeElement'
+import { RelativeTimeElement } from './RelativeTimeElement'
 
 let relativeElements: RelativeTimeElement[] = []
 let relativeTimeUpdateInterval: number | undefined
@@ -20,7 +20,7 @@ export function registerRelativeTimeElement(el: RelativeTimeElement): void {
 }
 
 export function unregisterRelativeTimeElement(el: RelativeTimeElement): void {
-  relativeElements = relativeElements.filter(element => el !== element)
+  relativeElements = relativeElements.filter((element) => el !== element)
   if (relativeElements.length === 0) {
     clearInterval(relativeTimeUpdateInterval)
     relativeTimeUpdateInterval = undefined

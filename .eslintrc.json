@@ -1,8 +1,8 @@
 {
   "root": true,
-  "extends": [
-    "plugin:github/browser",
-    "plugin:github/recommended",
-    "plugin:github/typescript"
-  ]
+  "plugins": ["custom-elements"],
+  "extends": ["plugin:custom-elements/recommended", "plugin:github/browser", "plugin:github/typescript", "prettier"],
+  "rules": {
+    "custom-elements/tag-name-matches-class": ["error", { "suffix": "Element" }]
+  }
 }
