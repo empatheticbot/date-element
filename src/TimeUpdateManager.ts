@@ -1,28 +1,30 @@
-import { RelativeTimeElement } from './RelativeTimeElement'
+let timeElements: TimeElement[] = []
+let timeUpdateInterval: number | undefined
 
-let relativeElements: RelativeTimeElement[] = []
-let relativeTimeUpdateInterval: number | undefined
+interface TimeElement {
+  refreshDisplayTime(): void
+}
 
 function updateRelativeTimeElements() {
-  for (const element of relativeElements) {
+  for (const element of timeElements) {
     element.refreshDisplayTime()
   }
 }
 
-export function registerRelativeTimeElement(el: RelativeTimeElement): void {
-  if (relativeElements.includes(el)) {
+export function registerRelativeTimeElement(el: TimeElement): void {
+  if (timeElements.includes(el)) {
     return
   }
-  relativeElements.push(el)
-  if (relativeTimeUpdateInterval === undefined) {
-    relativeTimeUpdateInterval = setInterval(updateRelativeTimeElements, 1000)
+  timeElements.push(el)
+  if (timeUpdateInterval === undefined) {
+    timeUpdateInterval = setInterval(updateRelativeTimeElements, 1000)
   }
 }
 
-export function unregisterRelativeTimeElement(el: RelativeTimeElement): void {
-  relativeElements = relativeElements.filter((element) => el !== element)
-  if (relativeElements.length === 0) {
-    clearInterval(relativeTimeUpdateInterval)
-    relativeTimeUpdateInterval = undefined
+export function unregisterRelativeTimeElement(el: TimeElement): void {
+  timeElements = timeElements.filter((element) => el !== element)
+  if (timeElements.length === 0) {
+    clearInterval(timeUpdateInterval)
+    timeUpdateInterval = undefined
   }
 }
