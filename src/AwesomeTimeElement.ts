@@ -3,14 +3,18 @@ import { TimeUnit } from './utils'
 
 export class AwesomeTimeElement extends HTMLElement {
   date?: Date
-  relativeUntilDistanceDays = 4
+  relativeRangeInMilli = 4 * 1000 * 60 * 60 * 24
 
   static get observedAttributes(): string[] {
-    return ['datetime']
+    return ['datetime', 'relative-range']
   }
 
   connectedCallback(): void {
     const datetime = this.getAttribute('datetime')
+    const relativeRange = this.getAttribute('relative-range')
+    if (relativeRange && typeof parseInt(relativeRange, 10) === 'number') {
+      this.relativeRangeInMilli = parseInt(relativeRange, 10)
+    }
     if (!datetime) {
       return
     }
@@ -30,8 +34,13 @@ export class AwesomeTimeElement extends HTMLElement {
       } else {
         this.date = new Date(millis)
       }
+    } else if (attrName === 'relative-range') {
+      if (newValue && typeof parseInt(newValue, 10) === 'number') {
+        this.relativeRangeInMilli = parseInt(newValue, 10)
+      } else {
+        this.relativeRangeInMilli = 0
+      }
     }
-
     const text = this.getFormattedDate()
     if (text) {
       this.textContent = text
@@ -44,8 +53,7 @@ export class AwesomeTimeElement extends HTMLElement {
     }
     const today = new Date()
     const differenceInMilli = this.date.valueOf() - today.valueOf()
-    const daysInMilli = this.relativeUntilDistanceDays * 1000 * 60 * 60 * 24
-    return Math.abs(differenceInMilli) < daysInMilli
+    return Math.abs(differenceInMilli) < this.relativeRangeInMilli
   }
 
   isInFuture(): boolean {
