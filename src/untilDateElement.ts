@@ -8,6 +8,10 @@ export class UntilDateElement extends RelativeDateElement {
   getDefaultDateText(): string {
     return 'now'
   }
+
+  isNow(): boolean {
+    return !this.isRelativeTime()
+  }
 }
 
 if (!customElements.get('until-date')) {

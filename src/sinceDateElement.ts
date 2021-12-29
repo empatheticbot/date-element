@@ -13,6 +13,10 @@ export class SinceDateElement extends RelativeDateElement {
   getDefaultDateText(): string {
     return 'just now'
   }
+
+  isNow(): boolean {
+    return !this.isRelativeTime()
+  }
 }
 
 if (!customElements.get('since-date')) {

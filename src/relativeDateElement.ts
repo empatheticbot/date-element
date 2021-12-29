@@ -87,6 +87,14 @@ export class RelativeDateElement extends HTMLElement {
     return this.date.getTime() > today.getTime()
   }
 
+  isNow(): boolean {
+    if (!this.date) {
+      return false
+    }
+    const today = new Date()
+    return Math.abs(today.getTime() - this.date.getTime()) < 1000 * 60 * 2
+  }
+
   getDefaultDateText(): string {
     const formatter = Intl.DateTimeFormat('en-US', {
       year: 'numeric',
@@ -120,6 +128,7 @@ export class RelativeDateElement extends HTMLElement {
     if (title) {
       this.title = title
     }
+    this.classList.toggle('now', this.isNow())
   }
 }
 
