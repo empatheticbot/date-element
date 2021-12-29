@@ -7,12 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Relative Time Examples</title>
   <style>
-    relative-time {
-      display: block;
-      font-weight: 800;
-    }
-
-    awesome-time {
+    relative-date,
+    until-date,
+    awesome-date {
       display: block;
       font-weight: 800;
     }
@@ -20,27 +17,31 @@
 </head>
 
 <body>
-  <p>Today: <today-time></today-time>
+  <p>Today: <today-date></today-date>
   </p>
-  <!-- 
-  <relative-time id="before" datetime="08/06/2021"> 08/06/2021 </relative-time>
 
-  <relative-time id="after" datetime="08/06/2021"> 08/06/2021 </relative-time>
+  <since-date datetime="2021-12-29T18:19:00Z">12/26/2021</since-date>
+  <until-date datetime="12/31/2021">12/31/2021</until-date>
+  <until-date datetime="2021-12-29T18:30:00Z">12/30/2021</until-date>
+  <until-date datetime="08/06/2022">08/06/2022</until-date>
+  <relative-date id="before" datetime="08/06/2021"> 08/06/2021 </relative-date>
 
-  <relative-time datetime="2021-08-06T03:55:00Z"> Something else </relative-time>
-  <br>
-  <awesome-time></awesome-time>
-  <awesome-time id="a-before" datetime="08/06/2021"> 08/06/2021 </awesome-time> -->
+  <relative-date id="after" datetime="08/06/2021"> 08/06/2021 </relative-date>
 
-  <awesome-time id="a-after" relative-range="110" relative-unit="seconds"> 08/06/2021
-  </awesome-time>
+  <relative-date datetime="2021-08-06T03:55:00Z"> Something else </relative-date>
 
-  <!-- <awesome-time datetime="2021-08-06T03:55:00Z"> Something else </awesome-time> -->
+  <awesome-date id="a-before" datetime="08/06/2021" relative-range="125" relative-unit="second"> 08/06/2021
+  </awesome-date>
+
+  <awesome-date id="a-after" datetime="08/06/2021" relative-range="105" relative-unit="second"> 08/06/2021
+  </awesome-date>
+
+  <awesome-date datetime="2021-08-06T03:55:00Z"> Something else </awesome-date>
   <script>
-    // const before = document.querySelector('#a-before')
-    // const beforeDate = new Date()
-    // beforeDate.setMinutes(beforeDate.getMinutes() - 2)
-    // before.setAttribute('datetime', beforeDate.toISOString())
+    const before = document.querySelector('#a-before')
+    const beforeDate = new Date()
+    beforeDate.setMinutes(beforeDate.getMinutes() - 2)
+    before.setAttribute('datetime', beforeDate.toISOString())
 
     const after = document.querySelector('#a-after')
     const afterDate = new Date()

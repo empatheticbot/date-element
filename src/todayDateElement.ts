@@ -1,4 +1,4 @@
-export class TodayTimeElement extends HTMLElement {
+export class TodayDateElement extends HTMLElement {
   date?: Date
 
   connectedCallback(): void {
@@ -32,16 +32,16 @@ export class TodayTimeElement extends HTMLElement {
   }
 }
 
-if (!customElements.get('today-time')) {
-  window.TodayTimeElement = TodayTimeElement
-  customElements.define('today-time', TodayTimeElement)
+if (!customElements.get('today-date')) {
+  window.TodayDateElement = TodayDateElement
+  customElements.define('today-date', TodayDateElement)
 }
 
 declare global {
   interface Window {
-    TodayTimeElement: typeof TodayTimeElement
+    TodayDateElement: typeof TodayDateElement
   }
   interface HTMLElementTagNameMap {
-    'today-time': TodayTimeElement
+    'today-date': TodayDateElement
   }
 }
