@@ -1,3 +1,4 @@
+import resolve from 'rollup-plugin-node-resolve'
 import { module } from './package.json'
 
 export default [
@@ -7,5 +8,6 @@ export default [
       file: module,
       format: 'es',
     },
+    plugins: [resolve()],
   },
 ]

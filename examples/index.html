@@ -22,23 +22,25 @@
 <body>
   <p>Today: <today-time></today-time>
   </p>
-
+  <!-- 
   <relative-time id="before" datetime="08/06/2021"> 08/06/2021 </relative-time>
 
   <relative-time id="after" datetime="08/06/2021"> 08/06/2021 </relative-time>
 
   <relative-time datetime="2021-08-06T03:55:00Z"> Something else </relative-time>
+  <br>
+  <awesome-time></awesome-time>
+  <awesome-time id="a-before" datetime="08/06/2021"> 08/06/2021 </awesome-time> -->
 
-  <awesome-time id="a-before" datetime="08/06/2021"> 08/06/2021 </awesome-time>
+  <awesome-time id="a-after" relative-range="110" relative-unit="seconds"> 08/06/2021
+  </awesome-time>
 
-  <awesome-time id="a-after" datetime="08/06/2021" relative-range="200000"> 08/06/2021 </awesome-time>
-
-  <awesome-time datetime="2021-08-06T03:55:00Z"> Something else </awesome-time>
+  <!-- <awesome-time datetime="2021-08-06T03:55:00Z"> Something else </awesome-time> -->
   <script>
-    const before = document.querySelector('#a-before')
-    const beforeDate = new Date()
-    beforeDate.setMinutes(beforeDate.getMinutes() - 2)
-    before.setAttribute('datetime', beforeDate.toISOString())
+    // const before = document.querySelector('#a-before')
+    // const beforeDate = new Date()
+    // beforeDate.setMinutes(beforeDate.getMinutes() - 2)
+    // before.setAttribute('datetime', beforeDate.toISOString())
 
     const after = document.querySelector('#a-after')
     const afterDate = new Date()

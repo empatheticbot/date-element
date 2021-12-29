@@ -1,22 +1,42 @@
-import { registerRelativeTimeElement, unregisterRelativeTimeElement } from './TimeUpdateManager'
+import {
+  registerRelativeTimeElement,
+  unregisterRelativeTimeElement,
+} from './TimeUpdateManager'
 import { TimeUnit } from './utils'
+
+enum RelativeUnitOfTime {
+  Years = 'years',
+  Months = 'months',
+  Weeks = 'weeks',
+  Days = 'days',
+  Hours = 'hours',
+  Minutes = 'minutes',
+  Seconds = 'seconds',
+}
 
 export class AwesomeTimeElement extends HTMLElement {
   date?: Date
-  relativeRangeInMilli = 4 * 1000 * 60 * 60 * 24
+  relativeUnitOfTime?: RelativeUnitOfTime
+  relativeRangeInMilli?: number
 
   static get observedAttributes(): string[] {
-    return ['datetime', 'relative-range']
+    return ['datetime', 'relative-range', 'relative-unit']
   }
 
   connectedCallback(): void {
     const datetime = this.getAttribute('datetime')
-    const relativeRange = this.getAttribute('relative-range')
-    if (relativeRange && typeof parseInt(relativeRange, 10) === 'number') {
-      this.relativeRangeInMilli = parseInt(relativeRange, 10)
-    }
     if (!datetime) {
       return
+    }
+    const relativeRange = this.getAttribute('relative-range') || '48'
+    const relativeUnit =
+      (this.getAttribute('relative-unit') as RelativeUnitOfTime) ||
+      RelativeUnitOfTime.Hours
+    if (relativeRange && typeof parseInt(relativeRange, 10) === 'number') {
+      this.relativeRangeInMilli = this.getRelativeRangeInMilliseconds(
+        parseInt(relativeRange, 10),
+        relativeUnit
+      )
     }
     this.date = new Date(Date.parse(datetime))
     registerRelativeTimeElement(this)
@@ -26,7 +46,11 @@ export class AwesomeTimeElement extends HTMLElement {
     unregisterRelativeTimeElement(this)
   }
 
-  attributeChangedCallback(attrName: string, oldValue: string, newValue: string): void {
+  attributeChangedCallback(
+    attrName: string,
+    oldValue: string,
+    newValue: string
+  ): void {
     if (attrName === 'datetime') {
       const millis = Date.parse(newValue)
       if (isNaN(millis)) {
@@ -36,9 +60,18 @@ export class AwesomeTimeElement extends HTMLElement {
       }
     } else if (attrName === 'relative-range') {
       if (newValue && typeof parseInt(newValue, 10) === 'number') {
-        this.relativeRangeInMilli = parseInt(newValue, 10)
-      } else {
-        this.relativeRangeInMilli = 0
+        this.relativeRangeInMilli = this.getRelativeRangeInMilliseconds(
+          parseInt(newValue, 10),
+          this.relativeUnitOfTime || RelativeUnitOfTime.Hours
+        )
+      }
+    } else if (attrName === 'relative-unit') {
+      const relativeRange = this.getAttribute('relative-range') || '48'
+      if (typeof relativeRange === 'number') {
+        this.relativeRangeInMilli = this.getRelativeRangeInMilliseconds(
+          parseInt(relativeRange, 10),
+          this.relativeUnitOfTime || RelativeUnitOfTime.Hours
+        )
       }
     }
     const text = this.getFormattedDate()
@@ -47,13 +80,35 @@ export class AwesomeTimeElement extends HTMLElement {
     }
   }
 
+  getRelativeRangeInMilliseconds(range: number, unit: RelativeUnitOfTime) {
+    let milliseconds = 1000
+    switch (unit) {
+      case RelativeUnitOfTime.Months:
+        milliseconds *= 30
+      case RelativeUnitOfTime.Days:
+        milliseconds *= 24
+      default:
+      case RelativeUnitOfTime.Hours:
+        milliseconds *= 60
+      case RelativeUnitOfTime.Minutes:
+        milliseconds *= 60
+      case RelativeUnitOfTime.Seconds:
+        milliseconds *= 1
+    }
+    console.log(range, unit, milliseconds * range)
+    return milliseconds * range
+  }
+
   isRelativeTime(): boolean {
     if (!this.date) {
       return false
     }
     const today = new Date()
     const differenceInMilli = this.date.valueOf() - today.valueOf()
-    return Math.abs(differenceInMilli) < this.relativeRangeInMilli
+    if (this.relativeRangeInMilli) {
+      return Math.abs(differenceInMilli) < this.relativeRangeInMilli
+    }
+    return false
   }
 
   isInFuture(): boolean {
@@ -94,6 +149,7 @@ export class AwesomeTimeElement extends HTMLElement {
   }
 
   getFormattedDate(): string {
+    console.log(this.isRelativeTime(), this.date, this.relativeRangeInMilli)
     if ('Intl' in window && this.date !== undefined) {
       if (this.isRelativeTime()) {
         const formatter = new Intl.RelativeTimeFormat()

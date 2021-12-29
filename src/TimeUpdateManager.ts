@@ -17,14 +17,14 @@ export function registerRelativeTimeElement(el: TimeElement): void {
   }
   timeElements.push(el)
   if (timeUpdateInterval === undefined) {
-    timeUpdateInterval = setInterval(updateRelativeTimeElements, 1000)
+    timeUpdateInterval = window.setInterval(updateRelativeTimeElements, 1000)
   }
 }
 
 export function unregisterRelativeTimeElement(el: TimeElement): void {
   timeElements = timeElements.filter((element) => el !== element)
   if (timeElements.length === 0) {
-    clearInterval(timeUpdateInterval)
+    window.clearInterval(timeUpdateInterval)
     timeUpdateInterval = undefined
   }
 }

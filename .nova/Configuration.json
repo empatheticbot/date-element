@@ -1,9 +1,5 @@
 {
-<<<<<<< Updated upstream
-  "workspace.name" : "📆 date-element"
-=======
-  "editor.default_syntax" : "typescript",
-  "workspace.color" : 6,
-  "workspace.name" : "📆 Date Element"
->>>>>>> Stashed changes
+  "editor.default_syntax": "typescript",
+  "workspace.color": 6,
+  "workspace.name": "📆 Date Elements"
 }
