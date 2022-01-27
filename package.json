@@ -1,6 +1,6 @@
 {
   "name": "@empatheticbot/date-elements",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Custom elements to express dates in relative format and be updated dynamically.",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
