@@ -14,26 +14,25 @@ export function getSensibleRelativeUnitOfMeasurement(
     return [0, TimeUnit.Day]
   }
   const signedMilli = date.getTime() - new Date().getTime()
-  const roundingFunc = signedMilli < 0 ? Math.floor : Math.ceil
 
   const ms = Math.abs(signedMilli)
-  const sec = roundingFunc(ms / 1000)
-  const min = roundingFunc(sec / 60)
-  const hr = roundingFunc(min / 60)
-  const day = roundingFunc(hr / 24)
-  const month = roundingFunc(day / 30)
-  const year = roundingFunc(month / 12)
+  const sec = ms / 1000
+  const min = sec / 60
+  const hr = min / 60
+  const day = hr / 24
+  const month = day / 30
+  const year = month / 12
 
-  if (year > 1) {
-    return [year, TimeUnit.Year]
-  } else if (month > 1) {
-    return [month, TimeUnit.Month]
-  } else if (day > 1) {
-    return [day, TimeUnit.Day]
-  } else if (hr > 1) {
-    return [hr, TimeUnit.Hour]
-  } else if (min > 1) {
-    return [min, TimeUnit.Minute]
+  if (year >= 0.8) {
+    return [Math.round(year), TimeUnit.Year]
+  } else if (month >= 0.8) {
+    return [Math.round(month), TimeUnit.Month]
+  } else if (day >= 0.95) {
+    return [Math.round(day), TimeUnit.Day]
+  } else if (hr >= 1) {
+    return [Math.round(hr), TimeUnit.Hour]
+  } else if (min >= 0.5) {
+    return [Math.round(min), TimeUnit.Minute]
   }
   return [sec, TimeUnit.Second]
 }

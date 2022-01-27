@@ -30,6 +30,6 @@ declare global {
     SinceDateElement: typeof SinceDateElement
   }
   interface HTMLElementTagNameMap {
-    'until-date': SinceDateElement
+    'since-date': SinceDateElement
   }
 }

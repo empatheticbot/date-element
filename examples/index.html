@@ -20,6 +20,8 @@
   <p>Today: <today-date></today-date>
   </p>
 
+  <since-date id="test-since">12/26/2021</since-date>
+  <br>
   <since-date datetime="2021-12-29T18:19:00Z">12/26/2021</since-date>
   <until-date datetime="12/31/2021">12/31/2021</until-date>
   <until-date datetime="2021-12-29T18:30:00Z">12/30/2021</until-date>
@@ -47,6 +49,11 @@
     const afterDate = new Date()
     afterDate.setMinutes(afterDate.getMinutes() + 2)
     after.setAttribute('datetime', afterDate.toISOString())
+
+    const testSince = document.querySelector('#test-since')
+    const testSinceDate = new Date()
+    testSinceDate.setMinutes(testSinceDate.getMinutes() - 149)
+    testSince.setAttribute('datetime', testSinceDate.toISOString())
   </script>
   <script type="module" src="../dist/index.js"></script>
 </body>
