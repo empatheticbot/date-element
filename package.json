@@ -2,8 +2,9 @@
   "name": "@empatheticbot/date-elements",
   "version": "3.2.0",
   "description": "Custom elements to express dates in relative format and be updated dynamically.",
-  "module": "dist/index.js",
+  "main": "dist/index.bundled.js",
   "types": "dist/index.d.ts",
+  "module": "dist/index.bundled.js",
   "files": [
     "dist"
   ],
@@ -57,6 +58,7 @@
     "prettier": "^2.4.1",
     "rollup": "2.62.0",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
     "serve": "13.0.2",
     "ts-node": "10.4.0",
     "typescript": "4.5.4"

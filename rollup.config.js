@@ -1,5 +1,6 @@
 import resolve from 'rollup-plugin-node-resolve'
 import { module } from './package.json'
+import { terser } from 'rollup-plugin-terser'
 
 export default [
   {
@@ -8,6 +9,6 @@ export default [
       file: module,
       format: 'es',
     },
-    plugins: [resolve()],
+    plugins: [resolve(), terser()],
   },
 ]

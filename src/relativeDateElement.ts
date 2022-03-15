@@ -21,6 +21,7 @@ export class RelativeDateElement extends HTMLElement {
       this.date = new Date(Date.parse(datetime))
     }
     registerRelativeTimeElement(this)
+    this.refreshDisplayTime()
   }
 
   disconnectedCallback(): void {
