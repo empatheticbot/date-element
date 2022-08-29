@@ -1,67 +1,67 @@
 {
-  "name": "@empatheticbot/date-elements",
-  "version": "3.2.0",
-  "description": "Custom elements to express dates in relative format and be updated dynamically.",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "clean": "rm -rf dist",
-    "lint": "eslint . --ext .js,.ts && tsc --noEmit",
-    "prebuild": "npm run clean && npm run lint && mkdir dist",
-    "build": "tsc && rollup -c",
-    "prepublishOnly": "npm run build",
-    "start": "serve . -p 3000",
-    "pretest": "npm run build",
-    "test": "karma start test/karma.config.cjs",
-    "update": "npm-check -u"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://sledsworth@github.com/empatheticbot/date-element.git"
-  },
-  "keywords": [
-    "custom",
-    "elements",
-    "web",
-    "components",
-    "date",
-    "html",
-    "javascript"
-  ],
-  "author": "Steve Ledsworth",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/empatheticbot/date-element/issues"
-  },
-  "homepage": "https://github.com/empatheticbot/date-element#readme",
-  "devDependencies": {
-    "@types/chai": "^4.3.0",
-    "@types/mocha": "^9.0.0",
-    "chai": "^4.3.4",
-    "eslint": "^8.2.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-custom-elements": "^0.0.4",
-    "eslint-plugin-github": "^4.3.4",
-    "eslint-plugin-import": "^2.25.2",
-    "karma": "^6.3.9",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^3.1.0",
-    "karma-coverage": "^2.1.0",
-    "karma-mocha": "^2.0.1",
-    "karma-mocha-reporter": "^2.2.5",
-    "mocha": "^8.4.0",
-    "npm-check": "5.9.2",
-    "prettier": "^2.4.1",
-    "rollup": "2.62.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "serve": "13.0.2",
-    "ts-node": "10.4.0",
-    "typescript": "4.5.4"
-  },
-  "eslintIgnore": [
-    "dist/"
-  ]
+	"name": "@empatheticbot/date-elements",
+	"version": "3.2.1",
+	"description": "Custom elements to express dates in relative format and be updated dynamically.",
+	"module": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"clean": "rm -rf dist",
+		"lint": "eslint . --ext .js,.ts && tsc --noEmit",
+		"prebuild": "npm run clean && npm run lint && mkdir dist",
+		"build": "tsc && rollup -c",
+		"prepublishOnly": "npm run build",
+		"start": "serve . -p 3000",
+		"pretest": "npm run build",
+		"test": "karma start test/karma.config.cjs",
+		"update": "npx npm-check -u"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://sledsworth@github.com/empatheticbot/date-element.git"
+	},
+	"keywords": [
+		"custom",
+		"elements",
+		"web",
+		"components",
+		"date",
+		"html",
+		"javascript"
+	],
+	"author": "Steve Ledsworth",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/empatheticbot/date-element/issues"
+	},
+	"homepage": "https://github.com/empatheticbot/date-element#readme",
+	"devDependencies": {
+		"@types/chai": "^4.3.0",
+		"@types/mocha": "^9.0.0",
+		"chai": "^4.3.4",
+		"eslint": "^8.2.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-custom-elements": "^0.0.4",
+		"eslint-plugin-github": "^4.3.4",
+		"eslint-plugin-import": "^2.25.2",
+		"karma": "^6.3.9",
+		"karma-chai": "^0.1.0",
+		"karma-chrome-launcher": "^3.1.0",
+		"karma-coverage": "^2.1.0",
+		"karma-mocha": "^2.0.1",
+		"karma-mocha-reporter": "^2.2.5",
+		"mocha": "^8.4.0",
+		"prettier": "^2.4.1",
+		"rollup": "2.62.0",
+		"rollup-plugin-node-resolve": "^5.2.0",
+		"rollup-plugin-terser": "^7.0.2",
+		"serve": "13.0.2",
+		"ts-node": "10.4.0",
+		"typescript": "4.5.4"
+	},
+	"eslintIgnore": [
+		"dist/"
+	]
 }
